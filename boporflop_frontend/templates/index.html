@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bop or Flop | Group #34</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/style.css') }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="header">
+        <h1>🎵 Bop or Flop 🎵</h1>
+        <p>Welcome to Bop or Flop. This is a machine learning app running a random forest model on a Spotify dataset.</p>
+        <p>Tune the sliders to create a hypothetical song. See if your song is a <b style="color: #1DB954">BOP</b> or <b style="color: darkred">FLOP</b>!</p>
+    </div>
+
+    <form action="{{ url_for('predict') }}" method="post">
+        <div class="sliders-row">
+            <div class="slider-container">
+                <p class="title">Danceability:</p>
+                <input class="sliders" type="range" min="0" max="1" name="danceability" id="myRange" step="0.001">
+                <span id="danceabilityValue" style="font-weight:bold">0.5</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Energy:</p>
+                <input class="sliders" type="range" min="0" max="1" name="energy" id="myRange" step="0.001">
+                <span id="energyValue" style="font-weight:bold">0.5</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Key:</p>
+                <input class="sliders" type="range" min="0" max="1" name="key" id="myRange" step="0.001">
+                <span id="keyValue" style="font-weight:bold">0.5</span>
+            </div>
+        </div>
+
+        <div class="sliders-row">
+            <div class="slider-container">
+                <p class="title">Loudness:</p>
+                <input class="sliders" type="range" min="0" max="1" name="loudness" id="myRange" step="0.001">
+                <span id="loudnessValue" style="font-weight:bold">0.5</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Mode:</p>
+                <input class="sliders" type="range" min="0" max="1" name="mode" id="myRange">
+                <span id="modeValue" style="font-weight:bold">1</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Speechiness:</p>
+                <input class="sliders" type="range" min="0" max="1" name="speechiness" id="myRange" step="0.001">
+                <span id="speechinessValue" style="font-weight:bold">0.5</span>
+            </div>
+        </div>
+
+        <div class="sliders-row">
+            <div class="slider-container">
+                <p class="title">Acousticness:</p>
+                <input class="sliders" type="range" min="0" max="1" name="acousticness" id="myRange" step="0.001">
+                <span id="acousticnessValue" style="font-weight:bold">0.5</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Instrumentalness:</p>
+                <input class="sliders" type="range" min="0" max="1" name="instrumentalness" id="myRange" step="0.001">
+                <span id="instrumentalnessValue" style="font-weight:bold">0.5</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Liveness:</p>
+                <input class="sliders" type="range" min="0" max="1" name="liveness" id="myRange" step="0.001">
+                <span id="livenessValue" style="font-weight:bold">0.5</span>
+            </div>
+        </div>
+
+        <div class="sliders-row">
+            <div class="slider-container">
+                <p class="title">Valence:</p>
+                <input class="sliders" type="range" min="0" max="1" name="valence" id="myRange" step="0.001">
+                <span id="valenceValue" style="font-weight:bold">0.5</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Tempo:</p>
+                <input class="sliders" type="range" min="0" max="1" name="tempo" id="myRange" step="0.001">
+                <span id="tempoValue" style="font-weight:bold">0.5</span>
+            </div>
+
+            <div class="slider-container">
+                <p class="title">Duration:</p>
+                <input class="sliders" type="range" min="0" max="1" name="duration_ms" id="myRange" step="0.001">
+                <span id="duration_msValue" style="font-weight:bold">0.5</span>
+            </div>
+        </div>
+
+        <br>
+
+        <button type="submit" class="btn-submit" onclick="window.location.replace('/predict');">Test My Song</button>
+    </form>
+
+    <script>
+        const sliders = document.querySelectorAll('.sliders');
+    
+        sliders.forEach(slider => {
+            const sliderId = slider.getAttribute('name');
+            const valueSpan = document.getElementById(`${sliderId}Value`);
+    
+            slider.addEventListener('input', () => {
+                valueSpan.textContent = slider.value;
+
+                if (slider.value < 0.3) {
+                    valueSpan.style.color = 'darkred';
+                    slider.style.backgroundColor = 'darkred';
+                } else if (slider.value > 0.7) {
+                    valueSpan.style.color = '#1DB954';
+                    slider.style.backgroundColor = '#1DB954';
+                } else {
+                    valueSpan.style.color = 'black';
+                    slider.style.backgroundColor = 'black';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
