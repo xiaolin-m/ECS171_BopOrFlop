@@ -1,5 +1,5 @@
 # Bop or Flop
-Welcome to Bop or Flop, a machine learning project created in ECS 171 to determine if a song, based on its characteristics, will be a "bop" (popular) or "flop" (unpopular).
+Welcome to Bop or Flop, a machine learning project created to determine if a song, based on its characteristics, will be a "bop" (popular) or "flop" (unpopular).
 
 For this model we used a dataset from Kaggle that looked at 30000 Spotify songs and giving appropiate rankings of musical traits such as energy, instrumentalness, and most important, popularity.
 
